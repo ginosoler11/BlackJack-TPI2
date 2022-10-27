@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <div class="">
+    <h1 class="text-center text-white">♠ Blackjack</h1>
+
+    <a class="btn-logout float-right px-3 py-2" (click)="logout()">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+    </a>
+  </div>
+
+  <div class="container mx-auto py-3 row">
+    <div class="col-12 d-flex justify-content-center">
+      <button
+        *ngIf="playHandAgain"
+        type="button"
+        class="btn"
+        (click)="playHand()"
+      >
+        Start Game
+      </button>
+    </div>
+  </div>
+
+  <div class="container mx-auto py-3 row">
+    <div class="col-12 d-flex justify-content-center">
+      <button
+        *ngIf="!playAgain"
+        type="button"
+        class="btn mb-2"
+        (click)="restart()"
+      >
+        Restart
+      </button>
+    </div>
+    <hr class="text-white" />
+    <div class="col-12 d-flex justify-content-center">
+      <p class="text-white text-center point-player py-2 p-mazo">
+        Cartas en mazo: {{ cards.length }}
+      </p>
+    </div>
+    <div class="text-center">
+      <h1 class="ml-4 font-bold text-3xl text-white">
+        {{ messageWinner }}
+      </h1>
+    </div>
+  </div>
+
+  <div class="container mx-auto">
+    <h2 class="text-center text-white crupier-hand">Dealer's Hand</h2>
+    <div class="container mx-auto py-3 row">
+      <div class="col-12 d-flex justify-content-center">
+        <p class="text-white text-center point-player py-2">
+          points: {{ showDealerPoints }}
+        </p>
+      </div>
+    </div>
+    <div class="row py-4 text-center justify-content-center">
+      <div class="col-12">
+        <app-cartas [carta]="carta" *ngFor="let carta of crupier"></app-cartas>
+      </div>
+    </div>
+
+    <h2 class="text-center text-white crupier-hand">Player's Hand</h2>
+    <div class="container mx-auto py-3 row">
+      <div class="col-12 d-flex justify-content-center">
+        <p class="text-white text-center point-player py-2">
+          points: {{ showPlayerPoints }}
+        </p>
+      </div>
+    </div>
+    <div class="row py-4 text-center justify-content-center">
+      <div class="col-12">
+        <app-cartas [carta]="carta" *ngFor="let carta of player"></app-cartas>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 d-flex justify-content-center">
+    <button
+      *ngIf="playerScore < 21 && !platerPasses && !finishHand"
+      type="button"
+      class="btn mx-3 px-4 btn-ancho"
+      (click)="getCardPlayer()"
+    >
+      Hit <i class="fa-solid fa-plus icon-plus"></i>
+    </button>
+
+    <button
+      *ngIf="!blackJack && !platerPasses && !finishHand"
+      type="button"
+      class="btn mx-3 px-4 btn-ancho"
+      (click)="stand()"
+    >
+      Stand <i class="fa-solid fa-hand icon-hand"></i>
+    </button>
+  </div>
+</div>
